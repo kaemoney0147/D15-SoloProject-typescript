@@ -1,12 +1,23 @@
 import express from "express";
 import createError from "http-errors";
 import UsersModel from "./model";
+import { Request } from "express";
 import { createAccessToken } from "../../lib/auth/tools";
 import { JWTAuthMiddleware } from "../../lib/auth/jwt";
 
+export interface RequestedUser {
+  _id: string;
+  role: string;
+  token: string;
+}
+
+export interface UserRequest extends Request {
+  user: RequestedUser;
+}
+
 const usersRouter = express.Router();
 
-usersRouter.post("/", async (req, res, next) => {
+usersRouter.post("/register", async (req, res, next) => {
   try {
     const newUser = new UsersModel(req.body);
     const { _id } = await newUser.save();

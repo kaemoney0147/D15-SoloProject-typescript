@@ -3,7 +3,7 @@ import cors from "cors";
 // import { Server } from "socket.io"
 import { createServer } from "http"; // CORE MODULE
 // import { newConnectionHandler } from "./socket"
-// import productsRouter from "./api/products"
+import accommodationRouter from "./api/accommodation/index";
 import usersRouter from "./api/users";
 import {
   badRequestHandler,
@@ -24,7 +24,7 @@ expressServer.use(cors());
 expressServer.use(express.json());
 
 // ************************************ ENDPOINTS ********************************
-// expressServer.use("/products", productsRouter)
+expressServer.use("/products", accommodationRouter);
 expressServer.use("/users", usersRouter);
 
 // *********************************** ERROR HANDLERS ****************************
